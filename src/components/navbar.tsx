@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
   { label: "Courses", href: "/courses" },
-  { label: "Programs", href: "/programs" },
-  { label: "About", href: "/about" },
+  // { label: "Programs", href: "/programs" },
   { label: "Blog", href: "/blog" },
 ] as const;
 
@@ -23,7 +23,6 @@ export function Navbar() {
       style={{ borderRadius: 0 }}
     >
       <nav className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:px-16">
-        {/* Left: Brand */}
         <Link
           href="/"
           className="flex items-center gap-2 font-heading text-lg font-bold tracking-tight text-white"
@@ -36,7 +35,6 @@ export function Navbar() {
           </span>
         </Link>
 
-        {/* Center: Desktop Nav Links */}
         <ul className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
@@ -50,7 +48,6 @@ export function Navbar() {
           ))}
         </ul>
 
-        {/* Right: Actions */}
         <div className="hidden items-center gap-3 lg:flex">
           <Link
             href="/login"
@@ -67,7 +64,6 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile: Hamburger */}
         <button
           type="button"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -78,7 +74,6 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       <div
         className={cn(
           "overflow-hidden border-t border-white/5 bg-[#0F172A]/95 backdrop-blur-xl transition-all duration-300 lg:hidden",
