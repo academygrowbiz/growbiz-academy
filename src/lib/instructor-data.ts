@@ -1,0 +1,133 @@
+export interface InstructorProfile {
+  name: string;
+  image: string;
+  role: string;
+  bio: string;
+  rating: number;
+  reviews: number;
+  students: number;
+  courses: number;
+}
+
+export const instructorProfiles: Record<string, InstructorProfile> = {
+  "John Smith": {
+    name: "John Smith",
+    image: "/albert.png",
+    role: "Senior Web Designer & Front-End Developer",
+    bio: "John has over 10 years of experience in web design and front-end development. He has worked with Fortune 500 companies and startups alike, building user-centric websites and design systems. His teaching approach focuses on practical, real-world skills that students can immediately apply in their careers.",
+    rating: 4.8,
+    reviews: 2340,
+    students: 18500,
+    courses: 6,
+  },
+  "Emily Johnson": {
+    name: "Emily Johnson",
+    image: "/courtney.png",
+    role: "Lead UX Designer & Design Thinking Coach",
+    bio: "Emily is a seasoned UX designer with 8 years of experience across product design, user research, and design systems. She has led design teams at multiple SaaS companies and is passionate about making design education accessible and hands-on.",
+    rating: 4.9,
+    reviews: 1890,
+    students: 14200,
+    courses: 4,
+  },
+  "Sarah Thompson": {
+    name: "Sarah Thompson",
+    image: "/therasa.png",
+    role: "Creative Director & Brand Strategist",
+    bio: "Sarah brings 12 years of graphic design and branding experience to her teaching. As a former Creative Director at a top agency, she specializes in typography, visual identity, and brand strategy. Her courses help students build stunning portfolios.",
+    rating: 4.7,
+    reviews: 1560,
+    students: 12800,
+    courses: 5,
+  },
+  "Michael Lee": {
+    name: "Michael Lee",
+    image: "/marvin.png",
+    role: "Full-Stack Developer & Engineering Lead",
+    bio: "Michael is a full-stack engineer with 9 years building production applications using React, Node.js, and TypeScript. He has led front-end teams at high-growth tech companies and brings deep, practical expertise to every lesson.",
+    rating: 4.8,
+    reviews: 3200,
+    students: 24500,
+    courses: 8,
+  },
+  "Rachel Adams": {
+    name: "Rachel Adams",
+    image: "/courtney.png",
+    role: "Senior JavaScript Engineer & Technical Author",
+    bio: "Rachel is an advanced JavaScript specialist with 7 years of experience in performance-critical web applications. She contributes to open-source projects, writes technical articles, and specializes in teaching complex concepts clearly.",
+    rating: 4.9,
+    reviews: 2780,
+    students: 19800,
+    courses: 5,
+  },
+  "David Brown": {
+    name: "David Brown",
+    image: "/albert.png",
+    role: "Mobile Developer & React Native Specialist",
+    bio: "David has shipped 15+ mobile applications to the App Store and Play Store over 8 years. He specializes in React Native and cross-platform development, helping students go from zero to published app.",
+    rating: 4.7,
+    reviews: 2100,
+    students: 16400,
+    courses: 6,
+  },
+  "Sarah Chen": {
+    name: "Sarah Chen",
+    image: "/therasa.png",
+    role: "Strategy Consultant & Business Coach",
+    bio: "Sarah is a former McKinsey consultant with 15 years of experience in strategic planning and business development. She has advised Fortune 100 companies and now teaches practical strategy frameworks to aspiring business leaders.",
+    rating: 4.8,
+    reviews: 1420,
+    students: 9800,
+    courses: 4,
+  },
+  "James Carter": {
+    name: "James Carter",
+    image: "/marvin.png",
+    role: "Serial Entrepreneur & Startup Advisor",
+    bio: "James has founded 3 successful startups and raised over $10M in venture funding. He now mentors early-stage founders and teaches the practical skills needed to validate ideas, build MVPs, and scale businesses.",
+    rating: 4.6,
+    reviews: 1850,
+    students: 13600,
+    courses: 3,
+  },
+  "Alex Morgan": {
+    name: "Alex Morgan",
+    image: "/albert.png",
+    role: "AI Solutions Architect & Automation Expert",
+    bio: "Alex has 6 years of experience deploying AI and automation solutions for enterprise clients. He specializes in making complex AI concepts accessible and helping professionals leverage no-code AI tools in their workflows.",
+    rating: 4.8,
+    reviews: 2450,
+    students: 17200,
+    courses: 5,
+  },
+  "Nina Patel": {
+    name: "Nina Patel",
+    image: "/therasa.png",
+    role: "AI Researcher & Prompt Engineering Pioneer",
+    bio: "Nina is a former AI researcher who has been working with large language models since GPT-2. She specializes in prompt engineering, AI workflows, and helping professionals get the most from tools like ChatGPT and Claude.",
+    rating: 4.9,
+    reviews: 3400,
+    students: 28000,
+    courses: 4,
+  },
+  "David Okafor": {
+    name: "David Okafor",
+    image: "/marvin.png",
+    role: "Growth Marketing Lead & Analytics Expert",
+    bio: "David has driven 10x growth for multiple SaaS companies through data-driven marketing strategies. He brings 8 years of hands-on experience in paid acquisition, SEO, analytics, and growth hacking to his teaching.",
+    rating: 4.7,
+    reviews: 2100,
+    students: 15600,
+    courses: 5,
+  },
+  "Maria Lopez": {
+    name: "Maria Lopez",
+    image: "/courtney.png",
+    role: "SEO Strategist & Content Marketing Director",
+    bio: "Maria has managed SEO and content strategies for brands generating millions in organic traffic. With 9 years in digital marketing, she teaches practical techniques that deliver measurable results for any business or brand.",
+    rating: 4.8,
+    reviews: 1920,
+    students: 13400,
+    courses: 4,
+  },
+};

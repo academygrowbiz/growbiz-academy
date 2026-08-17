@@ -4,7 +4,10 @@ import type { Course } from "@/lib/courses-data";
 
 export function CourseCard({ course }: { course: Course }) {
   return (
-    <div className="group flex flex-col overflow-hidden rounded-[20px] border border-white/[0.08] bg-white/[0.03] transition-all duration-300 hover:border-[#7C3AED]/30 hover:shadow-[0_0_20px_rgba(124,58,237,0.08)]">
+    <Link
+      href={`/courses/${course.categorySlug}/${course.slug}`}
+      className="group flex flex-col overflow-hidden rounded-[20px] border border-white/[0.08] bg-white/[0.03] transition-all duration-300 hover:border-[#7C3AED]/30 hover:shadow-[0_0_20px_rgba(124,58,237,0.08)] lg:hover:-translate-y-1 lg:hover:scale-[1.02]"
+    >
       <div className="relative h-40 overflow-hidden border-b border-white/[0.06]">
         <img
           src={course.image}
@@ -36,15 +39,12 @@ export function CourseCard({ course }: { course: Course }) {
             <div className="h-5 w-5 rounded-full bg-gradient-to-br from-[#7C3AED]/40 to-[#3B82F6]/40" />
             <span className="text-[11px] text-[#ccc3d7]">{course.instructor}</span>
           </div>
-          <Link
-            href={`/courses/${course.categorySlug}/${course.slug}`}
-            className="inline-flex items-center gap-1 text-[11px] font-medium text-[#d3bbff] transition-colors hover:text-white"
-          >
+          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#d3bbff] transition-colors group-hover:text-white">
             View
             <ArrowRight className="h-3 w-3" />
-          </Link>
+          </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

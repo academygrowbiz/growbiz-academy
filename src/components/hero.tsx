@@ -61,12 +61,12 @@ export function Hero() {
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
-              <Link href="/courses">
+              <Link href="/signup">
                 <Button className="h-11 rounded-[20px] border-0 bg-gradient-to-b from-[#7C3AED] to-[#6D28D9] px-6 text-sm font-semibold text-white shadow-[0_0_20px_rgba(124,58,237,0.35)] transition-all hover:shadow-[0_0_28px_rgba(124,58,237,0.55)]">
                   Get Started
                 </Button>
               </Link>
-              <Link href="/programs">
+              <Link href="/courses">
                 <Button
                   variant="ghost"
                   className="h-11 rounded-[20px] border border-white/10 bg-white/[0.04] px-5 text-sm font-medium text-[#ccc3d7] backdrop-blur-sm transition-all hover:border-[#7C3AED]/30 hover:bg-white/[0.08] hover:text-white"

@@ -70,45 +70,44 @@ export function CoursesSidebar() {
         </div>
       </aside>
 
-      <div className="mb-6 lg:hidden">
-        <button
-          onClick={() => setMobileOpen((prev) => !prev)}
-          className="flex w-full items-center justify-between rounded-[16px] border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm font-medium text-white"
-        >
-          <span className="flex items-center gap-2">
-            <LayoutGrid className="h-4 w-4 text-[#d3bbff]" />
+      <div className="relative mb-6 flex justify-end lg:hidden">
+        <div className="inline-block">
+          <button
+            onClick={() => setMobileOpen((prev) => !prev)}
+            className="flex items-center gap-2 rounded-[16px] border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm font-medium text-white"
+          >
             {activeLabel}
-          </span>
-          <ChevronDown
-            className={cn(
-              "h-4 w-4 text-[#958da1] transition-transform",
-              mobileOpen && "rotate-180"
-            )}
-          />
-        </button>
-        {mobileOpen && (
-          <div className="mt-2 overflow-hidden rounded-[16px] border border-white/[0.08] bg-[#0F172A]/95 p-2 backdrop-blur-xl">
-            {sidebarLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={cn(
-                    "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm transition-colors",
-                    isActive
-                      ? "bg-[#7C3AED]/[0.12] font-medium text-white"
-                      : "text-[#958da1] hover:bg-white/[0.04] hover:text-white"
-                  )}
-                >
-                  <link.icon className="h-4 w-4" />
-                  {link.label}
-                </Link>
-              );
-            })}
-          </div>
-        )}
+            <ChevronDown
+              className={cn(
+                "h-4 w-4 text-[#958da1] transition-transform",
+                mobileOpen && "rotate-180"
+              )}
+            />
+          </button>
+          {mobileOpen && (
+            <div className="absolute right-0 z-20 mt-2 w-56 overflow-hidden rounded-[16px] border border-white/[0.08] bg-[#0F172A]/95 p-2 backdrop-blur-xl">
+              {sidebarLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm transition-colors",
+                      isActive
+                        ? "bg-[#7C3AED]/[0.12] font-medium text-white"
+                        : "text-[#958da1] hover:bg-white/[0.04] hover:text-white"
+                    )}
+                  >
+                    <link.icon className="h-4 w-4" />
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

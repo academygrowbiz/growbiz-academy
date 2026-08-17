@@ -52,8 +52,10 @@ const cards = [
 
 export function ExploreLearning() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mobileIndex, setMobileIndex] = useState(0);
   const isPaused = useRef(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const startAutoSlide = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -89,6 +91,27 @@ export function ExploreLearning() {
 
   const visibleIndices = getVisibleIndices();
 
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const scrollLeft = container.scrollLeft;
+    const cardWidth = container.firstElementChild
+      ? (container.firstElementChild as HTMLElement).offsetWidth
+      : 1;
+    const index = Math.round(scrollLeft / cardWidth);
+    setMobileIndex(Math.min(index, cards.length - 1));
+  };
+
+  const scrollToIndex = (index: number) => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const cardWidth = container.firstElementChild
+      ? (container.firstElementChild as HTMLElement).offsetWidth
+      : 0;
+    container.scrollTo({ left: cardWidth * index, behavior: "smooth" });
+    setMobileIndex(index);
+  };
+
   return (
     <section className="relative px-5 py-20 md:px-16 md:py-20">
       <div className="mx-auto max-w-[1440px]">
@@ -104,68 +127,134 @@ Explore What You Can Learn          </h2>
           </p>
         </div>
 
-        <div
-          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          {visibleIndices.map((cardIndex, position) => {
-            const card = cards[cardIndex];
-            const isActive = position === 0;
-
-            return (
+        {/* Mobile/Tablet horizontal carousel */}
+        <div className="lg:hidden">
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {cards.map((card, index) => (
               <div
-                key={cardIndex}
-                className={`group flex flex-col rounded-[20px] border p-6 transition-all duration-500 ${
-                  isActive
-                    ? "border-[#7C3AED]/40 bg-[#7C3AED]/[0.06] shadow-[0_0_24px_rgba(124,58,237,0.12)]"
-                    : "border-white/[0.08] bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05]"
-                }`}
+                key={index}
+                className="w-[85%] flex-shrink-0 snap-start sm:w-[48%]"
               >
                 <div
-                  className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-500 ${
-                    isActive
-                      ? "bg-[#7C3AED]/25 shadow-[0_0_12px_rgba(124,58,237,0.3)]"
-                      : "bg-[#7C3AED]/15 group-hover:bg-[#7C3AED]/20"
+                  className={`group flex h-full flex-col rounded-[20px] border p-6 transition-all duration-500 ${
+                    index === mobileIndex
+                      ? "border-[#7C3AED]/40 bg-[#7C3AED]/[0.06] shadow-[0_0_24px_rgba(124,58,237,0.12)]"
+                      : "border-white/[0.08] bg-white/[0.03]"
                   }`}
                 >
-                  <card.icon className="h-5 w-5 text-[#d3bbff]" />
+                  <div
+                    className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-500 ${
+                      index === mobileIndex
+                        ? "bg-[#7C3AED]/25 shadow-[0_0_12px_rgba(124,58,237,0.3)]"
+                        : "bg-[#7C3AED]/15"
+                    }`}
+                  >
+                    <card.icon className="h-5 w-5 text-[#d3bbff]" />
+                  </div>
+
+                  <h3 className="mb-2 font-heading text-lg font-semibold text-white">
+                    {card.title}
+                  </h3>
+
+                  <p className="mb-5 flex-1 text-sm leading-relaxed text-[#958da1]">
+                    {card.description}
+                  </p>
+
+                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-[#d3bbff]">
+                    Learn More
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
                 </div>
-
-                <h3 className="mb-2 font-heading text-lg font-semibold text-white">
-                  {card.title}
-                </h3>
-
-                <p className="mb-5 flex-1 text-sm leading-relaxed text-[#958da1]">
-                  {card.description}
-                </p>
-
-                <span
-                  className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${
-                    isActive ? "text-white" : "text-[#d3bbff] group-hover:text-white"
-                  }`}
-                >
-                  Learn More
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                </span>
               </div>
-            );
-          })}
+            ))}
+          </div>
+
+          {/* Pagination dots for mobile/tablet */}
+          <div className="mt-6 flex items-center justify-center gap-2">
+            {cards.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollToIndex(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === mobileIndex
+                    ? "w-6 bg-[#7C3AED]"
+                    : "w-2 bg-white/20 hover:bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="mt-10 flex items-center justify-center gap-2">
-          {cards.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === activeIndex
-                  ? "w-6 bg-[#7C3AED]"
-                  : "w-2 bg-white/20 hover:bg-white/40"
-              }`}
-            />
-          ))}
+        {/* Desktop grid with auto-rotate */}
+        <div className="hidden lg:block">
+          <div
+            className="grid gap-5 lg:grid-cols-3"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {visibleIndices.map((cardIndex, position) => {
+              const card = cards[cardIndex];
+              const isActive = position === 0;
+
+              return (
+                <div
+                  key={cardIndex}
+                  className={`group flex flex-col rounded-[20px] border p-6 transition-all duration-500 ${
+                    isActive
+                      ? "border-[#7C3AED]/40 bg-[#7C3AED]/[0.06] shadow-[0_0_24px_rgba(124,58,237,0.12)]"
+                      : "border-white/[0.08] bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05]"
+                  }`}
+                >
+                  <div
+                    className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-500 ${
+                      isActive
+                        ? "bg-[#7C3AED]/25 shadow-[0_0_12px_rgba(124,58,237,0.3)]"
+                        : "bg-[#7C3AED]/15 group-hover:bg-[#7C3AED]/20"
+                    }`}
+                  >
+                    <card.icon className="h-5 w-5 text-[#d3bbff]" />
+                  </div>
+
+                  <h3 className="mb-2 font-heading text-lg font-semibold text-white">
+                    {card.title}
+                  </h3>
+
+                  <p className="mb-5 flex-1 text-sm leading-relaxed text-[#958da1]">
+                    {card.description}
+                  </p>
+
+                  <span
+                    className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${
+                      isActive ? "text-white" : "text-[#d3bbff] group-hover:text-white"
+                    }`}
+                  >
+                    Learn More
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-10 flex items-center justify-center gap-2">
+            {cards.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === activeIndex
+                    ? "w-6 bg-[#7C3AED]"
+                    : "w-2 bg-white/20 hover:bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

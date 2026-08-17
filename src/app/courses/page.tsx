@@ -12,14 +12,14 @@ export default function CoursesPage() {
   return (
     <main>
       <section className="relative overflow-hidden">
-        <div className="relative h-[220px] w-full md:h-[270px]">
+        <div className="relative h-[340px] w-full md:h-[320px] lg:h-[340px]">
           <img
             src="/courseshero.png"
             alt="GrowBiz Academy Courses"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/90 via-[#0F172A]/70 to-[#0F172A]/40" />
-          <div className="absolute inset-0 flex items-center px-5 md:px-16">
+          <div className="absolute inset-0 flex items-center px-5 pt-14 md:px-16 md:pt-16 lg:pt-12">
             <div className="mx-auto w-full max-w-[1440px]">
               <p className="mb-2 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#d3bbff]">
                 Explore Courses
@@ -31,9 +31,9 @@ export default function CoursesPage() {
                 Expert-led courses in design, development, AI, business and
                 digital skills — built for professionals ready to grow.
               </p>
-              <Link href="#courses-content" className="mt-5 inline-block">
+              <Link href="/signup" className="mt-5 inline-block">
                 <Button className="h-10 rounded-[20px] border-0 bg-gradient-to-b from-[#7C3AED] to-[#6D28D9] px-5 text-sm font-semibold text-white shadow-[0_0_16px_rgba(124,58,237,0.3)] transition-all hover:shadow-[0_0_24px_rgba(124,58,237,0.5)]">
-                  Browse Categories
+                  Start for Free
                   <ArrowRight className="ml-1.5 h-4 w-4" />
                 </Button>
               </Link>
@@ -43,7 +43,7 @@ export default function CoursesPage() {
       </section>
 
       <div id="courses-content" className="px-5 py-10 md:px-16 md:py-14">
-        <div className="mx-auto flex max-w-[1440px] gap-10">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-0 lg:flex-row lg:gap-10">
           <CoursesSidebar />
 
           <div className="min-w-0 flex-1">

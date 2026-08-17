@@ -13,6 +13,7 @@ const courses = [
   {
     slug: "web-design-fundamentals",
     category: "Design",
+    categorySlug: "design",
     title: "Web Design Fundamentals",
     description:
       "Learn the fundamentals of web design, including HTML, CSS, and responsive design principles for creating modern websites.",
@@ -24,6 +25,7 @@ const courses = [
   {
     slug: "ui-ux-design",
     category: "Design",
+    categorySlug: "design",
     title: "UI/UX Design",
     description:
       "Master the art of creating intuitive user interfaces (UI) and user experiences (UX). Learn design principles, prototyping, and usability testing.",
@@ -35,6 +37,7 @@ const courses = [
   {
     slug: "mobile-app-development",
     category: "Development",
+    categorySlug: "mobile-development",
     title: "Mobile App Development",
     description:
       "Dive into the world of mobile app development. Learn to build cross-platform apps for iOS and Android using modern frameworks.",
@@ -46,6 +49,7 @@ const courses = [
   {
     slug: "graphic-design-for-beginners",
     category: "Design",
+    categorySlug: "design",
     title: "Graphic Design for Beginners",
     description:
       "Discover the fundamentals of graphic design, including typography, color theory, and composition. Start creating stunning visual designs.",
@@ -57,6 +61,7 @@ const courses = [
   {
     slug: "front-end-web-development",
     category: "Development",
+    categorySlug: "development",
     title: "Front-End Web Development",
     description:
       "Become proficient in front-end development with modern JavaScript frameworks, responsive layouts, and performance optimization.",
@@ -68,6 +73,7 @@ const courses = [
   {
     slug: "advanced-javascript",
     category: "Development",
+    categorySlug: "development",
     title: "Advanced JavaScript",
     description:
       "Take your JavaScript skills to the next level with advanced patterns, async programming, and modern ES6+ features.",
@@ -80,8 +86,10 @@ const courses = [
 
 export function PopularCourses() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mobileIndex, setMobileIndex] = useState(0);
   const isPaused = useRef(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
@@ -112,6 +120,27 @@ export function PopularCourses() {
 
   const visibleIndices = getVisibleIndices();
 
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const scrollLeft = container.scrollLeft;
+    const cardWidth = container.firstElementChild
+      ? (container.firstElementChild as HTMLElement).offsetWidth
+      : 1;
+    const index = Math.round(scrollLeft / cardWidth);
+    setMobileIndex(Math.min(index, courses.length - 1));
+  };
+
+  const scrollToIndex = (index: number) => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const cardWidth = container.firstElementChild
+      ? (container.firstElementChild as HTMLElement).offsetWidth
+      : 0;
+    container.scrollTo({ left: cardWidth * index, behavior: "smooth" });
+    setMobileIndex(index);
+  };
+
   return (
     <section className="relative px-5 py-20 md:px-16 md:py-20">
       <div className="mx-auto max-w-[1440px]">
@@ -129,101 +158,187 @@ export function PopularCourses() {
           </p>
         </div>
 
-        <div
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          {visibleIndices.map((cardIndex, position) => {
-            const course = courses[cardIndex];
-            const isActive = position === 0;
-
-            return (
+        {/* Mobile/Tablet horizontal carousel — native swipe, no autoplay */}
+        <div className="lg:hidden">
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {courses.map((course, index) => (
               <div
-                key={cardIndex}
-                className={`group flex flex-col overflow-hidden rounded-[20px] border transition-all duration-500 ${
-                  isActive
-                    ? "border-[#7C3AED]/40 bg-[#7C3AED]/[0.04] shadow-[0_0_20px_rgba(124,58,237,0.1)]"
-                    : "border-white/[0.08] bg-white/[0.03] hover:border-white/15"
-                }`}
+                key={index}
+                className="w-[78%] flex-shrink-0 snap-start sm:w-[42%]"
               >
-                <div className="relative h-44 overflow-hidden border-b border-white/[0.06]">
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="h-full w-full object-cover"
-                  />
-
-                  <div className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#0F172A]/80 px-2.5 py-1 backdrop-blur-sm">
-                    <Clock className="h-3 w-3 text-[#958da1]" />
-                    <span className="text-[10px] font-medium text-[#ccc3d7]">
-                      {course.duration}
-                    </span>
+                <Link
+                  href={`/courses/${course.categorySlug}/${course.slug}`}
+                  className={`group flex h-full flex-col overflow-hidden rounded-[20px] border transition-colors duration-300 ${
+                    index === mobileIndex
+                      ? "border-[#7C3AED]/40 bg-[#7C3AED]/[0.04] shadow-[0_0_20px_rgba(124,58,237,0.1)]"
+                      : "border-white/[0.08] bg-white/[0.03]"
+                  }`}
+                >
+                  <div className="relative h-44 overflow-hidden border-b border-white/[0.06]">
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#0F172A]/80 px-2.5 py-1 backdrop-blur-sm">
+                      <Clock className="h-3 w-3 text-[#958da1]" />
+                      <span className="text-[10px] font-medium text-[#ccc3d7]">
+                        {course.duration}
+                      </span>
+                    </div>
+                    <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#0F172A]/80 px-2.5 py-1 backdrop-blur-sm">
+                      <BarChart3 className="h-3 w-3 text-[#958da1]" />
+                      <span className="text-[10px] font-medium text-[#ccc3d7]">
+                        {course.level}
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#0F172A]/80 px-2.5 py-1 backdrop-blur-sm">
-                    <BarChart3 className="h-3 w-3 text-[#958da1]" />
-                    <span className="text-[10px] font-medium text-[#ccc3d7]">
-                      {course.level}
-                    </span>
+                  <div className="flex flex-1 flex-col p-5">
+                    <p className="mb-2 font-technical text-[11px] font-medium uppercase tracking-[0.08em] text-[#7C3AED]">
+                      {course.category}
+                    </p>
+                    <h3 className="mb-2 font-heading text-base font-semibold text-white">
+                      {course.title}
+                    </h3>
+                    <p className="mb-4 flex-1 text-sm leading-relaxed text-[#958da1]">
+                      {course.description}
+                    </p>
+                    <div className="flex items-center justify-between border-t border-white/[0.06] pt-4">
+                      <div className="flex items-center gap-2">
+                        <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#7C3AED]/40 to-[#3B82F6]/40" />
+                        <span className="text-xs text-[#ccc3d7]">
+                          {course.instructor}
+                        </span>
+                      </div>
+                      <span className="inline-flex items-center gap-1 text-xs font-medium text-[#d3bbff]">
+                        View
+                        <ArrowRight className="h-3 w-3" />
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
+              </div>
+            ))}
+          </div>
 
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="mb-2 font-technical text-[11px] font-medium uppercase tracking-[0.08em] text-[#7C3AED]">
-                    {course.category}
-                  </p>
+          {/* Pagination dots for mobile/tablet */}
+          <div className="mt-6 flex items-center justify-center gap-2">
+            {courses.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollToIndex(i)}
+                aria-label={`Go to course ${i + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === mobileIndex
+                    ? "w-6 bg-[#7C3AED]"
+                    : "w-2 bg-white/20 hover:bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
 
-                  <h3 className="mb-2 font-heading text-base font-semibold text-white">
-                    {course.title}
-                  </h3>
+        {/* Desktop grid with auto-rotate + hover enlarge/elevate */}
+        <div className="hidden lg:block">
+          <div
+            className="grid gap-6 lg:grid-cols-3"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {visibleIndices.map((cardIndex, position) => {
+              const course = courses[cardIndex];
+              const isActive = position === 0;
 
-                  <p className="mb-4 flex-1 text-sm leading-relaxed text-[#958da1]">
-                    {course.description}
-                  </p>
+              return (
+                <Link
+                  key={cardIndex}
+                  href={`/courses/${course.categorySlug}/${course.slug}`}
+                  className={`group flex flex-col overflow-hidden rounded-[20px] border transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] ${
+                    isActive
+                      ? "border-[#7C3AED]/40 bg-[#7C3AED]/[0.04] shadow-[0_0_20px_rgba(124,58,237,0.1)]"
+                      : "border-white/[0.08] bg-white/[0.03] hover:border-white/15"
+                  }`}
+                >
+                  <div className="relative h-44 overflow-hidden border-b border-white/[0.06]">
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
 
-                  <div className="flex items-center justify-between border-t border-white/[0.06] pt-4">
-                    <div className="flex items-center gap-2">
-                      <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#7C3AED]/40 to-[#3B82F6]/40" />
-                      <span className="text-xs text-[#ccc3d7]">
-                        {course.instructor}
+                    <div className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#0F172A]/80 px-2.5 py-1 backdrop-blur-sm">
+                      <Clock className="h-3 w-3 text-[#958da1]" />
+                      <span className="text-[10px] font-medium text-[#ccc3d7]">
+                        {course.duration}
                       </span>
                     </div>
 
-                    <Link
-                      href={`/courses/${course.slug}`}
-                      className="inline-flex items-center gap-1 text-xs font-medium text-[#d3bbff] transition-colors hover:text-white"
-                    >
-                      Explore Course
-                      <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-                    </Link>
+                    <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#0F172A]/80 px-2.5 py-1 backdrop-blur-sm">
+                      <BarChart3 className="h-3 w-3 text-[#958da1]" />
+                      <span className="text-[10px] font-medium text-[#ccc3d7]">
+                        {course.level}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
 
-        <div className="mt-10 flex items-center justify-center gap-2">
-          {courses.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              aria-label={`Go to course ${i + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === activeIndex
-                  ? "w-6 bg-[#7C3AED]"
-                  : "w-2 bg-white/20 hover:bg-white/40"
-              }`}
-            />
-          ))}
+                  <div className="flex flex-1 flex-col p-5">
+                    <p className="mb-2 font-technical text-[11px] font-medium uppercase tracking-[0.08em] text-[#7C3AED]">
+                      {course.category}
+                    </p>
+
+                    <h3 className="mb-2 font-heading text-base font-semibold text-white">
+                      {course.title}
+                    </h3>
+
+                    <p className="mb-4 flex-1 text-sm leading-relaxed text-[#958da1]">
+                      {course.description}
+                    </p>
+
+                    <div className="flex items-center justify-between border-t border-white/[0.06] pt-4">
+                      <div className="flex items-center gap-2">
+                        <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#7C3AED]/40 to-[#3B82F6]/40" />
+                        <span className="text-xs text-[#ccc3d7]">
+                          {course.instructor}
+                        </span>
+                      </div>
+
+                      <span className="inline-flex items-center gap-1 text-xs font-medium text-[#d3bbff] transition-colors group-hover:text-white">
+                        View
+                        <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-10 flex items-center justify-center gap-2">
+            {courses.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                aria-label={`Go to course ${i + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === activeIndex
+                    ? "w-6 bg-[#7C3AED]"
+                    : "w-2 bg-white/20 hover:bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="mt-8 flex justify-center">
           <Link href="/courses">
             <Button
               variant="ghost"
-              className="h-8  border border-white/10 bg-white/[0.04] px-4 text-sm font-medium text-[#ccc3d7] backdrop-blur-sm transition-all hover:border-[#7C3AED]/30 hover:bg-white/[0.08] hover:text-white"
+              className="h-8 border border-white/10 bg-white/[0.04] px-4 text-sm font-medium text-[#ccc3d7] backdrop-blur-sm transition-all hover:border-[#7C3AED]/30 hover:bg-white/[0.08] hover:text-white"
             >
               Explore All Courses
               <ArrowRight className="ml-1.5 h-4 w-4" />

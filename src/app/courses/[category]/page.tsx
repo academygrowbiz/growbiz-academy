@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { CourseCard } from "@/components/course-card";
 import { CoursesSidebar } from "@/components/courses-sidebar";
 import { allCourses, categoriesMeta } from "@/lib/courses-data";
@@ -39,14 +40,14 @@ export default async function CategoryPage({
   return (
     <main>
       <section className="relative overflow-hidden">
-        <div className="relative h-[220px] w-full md:h-[280px]">
+        <div className="relative h-[340px] w-full md:h-[320px] lg:h-[340px]">
           <img
             src={meta.banner}
             alt={meta.label}
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/90 via-[#0F172A]/70 to-[#0F172A]/40" />
-          <div className="absolute inset-0 flex items-center px-5 md:px-16">
+          <div className="absolute inset-0 flex items-center px-5 pt-14 md:px-16 md:pt-16 lg:pt-12">
             <div className="mx-auto w-full max-w-[1440px]">
               <Link
                 href="/courses"
@@ -61,13 +62,19 @@ export default async function CategoryPage({
               <p className="mt-2 max-w-lg text-sm text-[#ccc3d7]">
                 {meta.description}
               </p>
+              <Link href="/signup" className="mt-5 inline-block">
+                <Button className="h-10 rounded-[20px] border-0 bg-gradient-to-b from-[#7C3AED] to-[#6D28D9] px-5 text-sm font-semibold text-white shadow-[0_0_16px_rgba(124,58,237,0.3)] transition-all hover:shadow-[0_0_24px_rgba(124,58,237,0.5)]">
+                  Start for Free
+                  <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       <div className="px-5 py-10 md:px-16 md:py-14">
-        <div className="mx-auto flex max-w-[1440px] gap-10">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-0 lg:flex-row lg:gap-10">
           <CoursesSidebar />
 
           <div className="min-w-0 flex-1">
