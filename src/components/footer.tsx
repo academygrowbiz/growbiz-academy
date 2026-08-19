@@ -1,10 +1,18 @@
 import Link from "next/link";
+import Image from "next/image";
 
-// Inline SVG social icons (brand icons not available in lucide-react v1.31+)
 function InstagramIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" />
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
     </svg>
@@ -64,46 +72,82 @@ const supportLinks = [
 ];
 
 const socials = [
-  { icon: InstagramIcon, href: "#", label: "Instagram" },
-  { icon: LinkedinIcon, href: "#", label: "LinkedIn" },
-  { icon: YoutubeIcon, href: "#", label: "YouTube" },
-  { icon: FacebookIcon, href: "#", label: "Facebook" },
-  { icon: XIcon, href: "#", label: "X" },
+  {
+    icon: InstagramIcon,
+    href: "#",
+    label: "Instagram",
+    color: "text-[#E4405F]",
+  },
+  {
+    icon: LinkedinIcon,
+    href: "#",
+    label: "LinkedIn",
+    color: "text-[#0A66C2]",
+  },
+  {
+    icon: YoutubeIcon,
+    href: "#",
+    label: "YouTube",
+    color: "text-[#FF0000]",
+  },
+  {
+    icon: FacebookIcon,
+    href: "#",
+    label: "Facebook",
+    color: "text-[#1877F2]",
+  },
+  {
+    icon: XIcon,
+    href: "#",
+    label: "X",
+    color: "text-black",
+  },
 ];
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] px-5 pt-16 pb-8 md:px-16">
+    // <footer className="border-t border-[#E5E7EB] bg-[#0F172A] px-5 pt-16 pb-8 md:px-16">
+    <footer className="border-t border-[#F1F5F9] px-5 pt-16 pb-8 md:px-16">
       <div className="mx-auto max-w-[1440px]">
         {/* Top grid */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
+            
             <Link
-              href="/"
-              className="mb-4 inline-flex items-center gap-2 font-heading text-lg font-bold text-white"
-            >
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-b from-[#7C3AED] to-[#6D28D9] text-sm font-bold text-white shadow-[0_0_10px_rgba(124,58,237,0.3)]">
-                G
-              </span>
-              <span>
-                GrowBiz<span className="text-[#d3bbff]"> Academy</span>
-              </span>
-            </Link>
-            <p className="mt-3 max-w-[280px] text-sm leading-relaxed text-[#958da1]">
+           href="/"
+           className="mb-4 inline-flex items-center gap-2 font-heading text-lg font-bold"
+          >
+          <Image
+           src="/logo.png"
+           alt="GrowBiz"
+           width={32}
+           height={32}
+           className="h-8 w-8 object-contain scale-[1.7]"
+          />
+
+  <span className="text-black">
+    GrowBiz<span className="text-[#7C3AED]"> Academy</span>
+  </span>
+</Link>
+
+            <p className="mt-3 max-w-[300px] text-sm leading-relaxed text-[#48454d]">
               A premium learning platform with expert-led courses across
               technology, business, and professional growth.
             </p>
+
             {/* Socials */}
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-2 flex items-center gap-3 mb-3 ">
               {socials.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-[#958da1] transition-all hover:border-[#7C3AED]/30 hover:bg-[#7C3AED]/10 hover:text-[#d3bbff]"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E5E7EB] bg-white transition-all hover:border-[#DDD6FE] hover:bg-[#EDE9FE]"
                 >
-                  <social.icon className="h-3.5 w-3.5" />
+                  <social.icon
+                    className={`h-3.5 w-3.5 ${social.color}`}
+                  />
                 </a>
               ))}
             </div>
@@ -111,7 +155,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="mb-4 font-heading text-sm font-semibold text-white">
+            <h4 className="mb-4 font-heading text-sm font-semibold text-black">
               Quick Links
             </h4>
             <ul className="flex flex-col gap-2.5">
@@ -119,7 +163,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-[#958da1] transition-colors hover:text-white"
+                    className="text-sm text-[#48454d] transition-colors hover:text-purple-600"
                   >
                     {link.label}
                   </Link>
@@ -130,7 +174,7 @@ export function Footer() {
 
           {/* Learning */}
           <div>
-            <h4 className="mb-4 font-heading text-sm font-semibold text-white">
+            <h4 className="mb-4 font-heading text-sm font-semibold text-black">
               Learning
             </h4>
             <ul className="flex flex-col gap-2.5">
@@ -138,7 +182,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-[#958da1] transition-colors hover:text-white"
+                    className="text-sm text-[#48454d] transition-colors hover:text-purple-600"
                   >
                     {link.label}
                   </Link>
@@ -149,7 +193,7 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="mb-4 font-heading text-sm font-semibold text-white">
+            <h4 className="mb-4 font-heading text-sm font-semibold text-black">
               Support
             </h4>
             <ul className="flex flex-col gap-2.5">
@@ -157,7 +201,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-[#958da1] transition-colors hover:text-white"
+                    className="text-sm text-[#48454d] transition-colors hover:text-purple-600"
                   >
                     {link.label}
                   </Link>
@@ -168,20 +212,22 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-6 sm:flex-row">
-          <p className="text-xs text-[#958da1]">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-[#b88ae8] pt-4 sm:flex-row">
+          <p className="text-xs text-black">
             © 2026 GrowBiz Academy. All rights reserved.
           </p>
+
           <div className="flex items-center gap-4">
             <Link
               href="/privacy"
-              className="text-xs text-[#958da1] transition-colors hover:text-white"
+              className="text-xs text-black transition-colors hover:text-purple-600"
             >
               Privacy Policy
             </Link>
+
             <Link
               href="/terms"
-              className="text-xs text-[#958da1] transition-colors hover:text-white"
+              className="text-xs text-black transition-colors hover:text-purple-600"
             >
               Terms
             </Link>

@@ -142,17 +142,17 @@ export function PopularCourses() {
   };
 
   return (
-    <section className="relative px-5 py-20 md:px-16 md:py-20">
+    <section className="relative bg-[#FAF9FF] px-5 py-20 md:px-16 md:py-20">
       <div className="mx-auto max-w-[1440px]">
         {/* Header */}
         <div className="mb-12 text-center">
-          <p className="mb-3 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#d3bbff]">
+          <p className="mb-3 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#7C3AED]">
             Explore Programs
           </p>
-          <h2 className="font-heading text-3xl font-bold text-white md:text-4xl lg:text-[40px]">
+          <h2 className="font-heading text-3xl font-bold text-[#0F172A] md:text-4xl lg:text-[40px]">
             Our Most Popular Courses
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-[#ccc3d7]">
+          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-[#475569]">
             Join our expert-led courses — the knowledge provided will help you
             grow your skills and career.
           </p>
@@ -174,25 +174,25 @@ export function PopularCourses() {
                   href={`/courses/${course.categorySlug}/${course.slug}`}
                   className={`group flex h-full flex-col overflow-hidden rounded-[20px] border transition-colors duration-300 ${
                     index === mobileIndex
-                      ? "border-[#7C3AED]/40 bg-[#7C3AED]/[0.04] shadow-[0_0_20px_rgba(124,58,237,0.1)]"
-                      : "border-white/[0.08] bg-white/[0.03]"
+                      ? "border-[#DDD6FE] bg-[#7C3AED]/[0.04] shadow-[0_0_20px_rgba(124,58,237,0.1)]"
+                      : "border-[#E5E7EB] bg-[#FFFFFF]"
                   }`}
                 >
-                  <div className="relative h-44 overflow-hidden border-b border-white/[0.06]">
+                  <div className="relative h-44 overflow-hidden border-b border-[#F1F5F9]">
                     <img
                       src={course.image}
                       alt={course.title}
                       className="h-full w-full object-cover"
                     />
-                    <div className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#0F172A]/80 px-2.5 py-1 backdrop-blur-sm">
-                      <Clock className="h-3 w-3 text-[#958da1]" />
-                      <span className="text-[10px] font-medium text-[#ccc3d7]">
+                    <div className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full border border-[#E5E7EB] bg-[#FFFFFF]/90 px-2.5 py-1 backdrop-blur-sm">
+                      <Clock className="h-3 w-3 text-[#64748B]" />
+                      <span className="text-[10px] font-medium text-[#475569]">
                         {course.duration}
                       </span>
                     </div>
-                    <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#0F172A]/80 px-2.5 py-1 backdrop-blur-sm">
-                      <BarChart3 className="h-3 w-3 text-[#958da1]" />
-                      <span className="text-[10px] font-medium text-[#ccc3d7]">
+                    <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-[#E5E7EB] bg-[#FFFFFF]/90 px-2.5 py-1 backdrop-blur-sm">
+                      <BarChart3 className="h-3 w-3 text-[#64748B]" />
+                      <span className="text-[10px] font-medium text-[#475569]">
                         {course.level}
                       </span>
                     </div>
@@ -202,20 +202,20 @@ export function PopularCourses() {
                     <p className="mb-2 font-technical text-[11px] font-medium uppercase tracking-[0.08em] text-[#7C3AED]">
                       {course.category}
                     </p>
-                    <h3 className="mb-2 font-heading text-base font-semibold text-white">
+                    <h3 className="mb-2 font-heading text-base font-semibold text-[#0F172A]">
                       {course.title}
                     </h3>
-                    <p className="mb-4 flex-1 text-sm leading-relaxed text-[#958da1]">
+                    <p className="mb-4 flex-1 text-sm leading-relaxed text-[#64748B]">
                       {course.description}
                     </p>
-                    <div className="flex items-center justify-between border-t border-white/[0.06] pt-4">
+                    <div className="flex items-center justify-between border-t border-[#F1F5F9] pt-4">
                       <div className="flex items-center gap-2">
                         <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#7C3AED]/40 to-[#3B82F6]/40" />
-                        <span className="text-xs text-[#ccc3d7]">
+                        <span className="text-xs text-[#475569]">
                           {course.instructor}
                         </span>
                       </div>
-                      <span className="inline-flex items-center gap-1 text-xs font-medium text-[#d3bbff]">
+                      <span className="inline-flex items-center gap-1 text-xs font-medium text-[#7C3AED]">
                         View
                         <ArrowRight className="h-3 w-3" />
                       </span>
@@ -236,7 +236,7 @@ export function PopularCourses() {
                 className={`h-2 rounded-full transition-all duration-300 ${
                   i === mobileIndex
                     ? "w-6 bg-[#7C3AED]"
-                    : "w-2 bg-white/20 hover:bg-white/40"
+                    : "w-2 bg-[#EDE9FE] hover:bg-[#DDD6FE]"
                 }`}
               />
             ))}
@@ -260,27 +260,27 @@ export function PopularCourses() {
                   href={`/courses/${course.categorySlug}/${course.slug}`}
                   className={`group flex flex-col overflow-hidden rounded-[20px] border transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] ${
                     isActive
-                      ? "border-[#7C3AED]/40 bg-[#7C3AED]/[0.04] shadow-[0_0_20px_rgba(124,58,237,0.1)]"
-                      : "border-white/[0.08] bg-white/[0.03] hover:border-white/15"
+                      ? "border-[#DDD6FE] bg-[#7C3AED]/[0.04] shadow-[0_0_20px_rgba(124,58,237,0.1)]"
+                      : "border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#E5E7EB]"
                   }`}
                 >
-                  <div className="relative h-44 overflow-hidden border-b border-white/[0.06]">
+                  <div className="relative h-44 overflow-hidden border-b border-[#F1F5F9]">
                     <img
                       src={course.image}
                       alt={course.title}
                       className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
 
-                    <div className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#0F172A]/80 px-2.5 py-1 backdrop-blur-sm">
-                      <Clock className="h-3 w-3 text-[#958da1]" />
-                      <span className="text-[10px] font-medium text-[#ccc3d7]">
+                    <div className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full border border-[#E5E7EB] bg-[#FFFFFF]/90 px-2.5 py-1 backdrop-blur-sm">
+                      <Clock className="h-3 w-3 text-[#64748B]" />
+                      <span className="text-[10px] font-medium text-[#475569]">
                         {course.duration}
                       </span>
                     </div>
 
-                    <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-white/10 bg-[#0F172A]/80 px-2.5 py-1 backdrop-blur-sm">
-                      <BarChart3 className="h-3 w-3 text-[#958da1]" />
-                      <span className="text-[10px] font-medium text-[#ccc3d7]">
+                    <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-[#E5E7EB] bg-[#FFFFFF]/90 px-2.5 py-1 backdrop-blur-sm">
+                      <BarChart3 className="h-3 w-3 text-[#64748B]" />
+                      <span className="text-[10px] font-medium text-[#475569]">
                         {course.level}
                       </span>
                     </div>
@@ -291,23 +291,23 @@ export function PopularCourses() {
                       {course.category}
                     </p>
 
-                    <h3 className="mb-2 font-heading text-base font-semibold text-white">
+                    <h3 className="mb-2 font-heading text-base font-semibold text-[#0F172A]">
                       {course.title}
                     </h3>
 
-                    <p className="mb-4 flex-1 text-sm leading-relaxed text-[#958da1]">
+                    <p className="mb-4 flex-1 text-sm leading-relaxed text-[#64748B]">
                       {course.description}
                     </p>
 
-                    <div className="flex items-center justify-between border-t border-white/[0.06] pt-4">
+                    <div className="flex items-center justify-between border-t border-[#F1F5F9] pt-4">
                       <div className="flex items-center gap-2">
                         <div className="h-7 w-7 rounded-full bg-gradient-to-br from-[#7C3AED]/40 to-[#3B82F6]/40" />
-                        <span className="text-xs text-[#ccc3d7]">
+                        <span className="text-xs text-[#475569]">
                           {course.instructor}
                         </span>
                       </div>
 
-                      <span className="inline-flex items-center gap-1 text-xs font-medium text-[#d3bbff] transition-colors group-hover:text-white">
+                      <span className="inline-flex items-center gap-1 text-xs font-medium text-[#7C3AED] transition-colors group-hover:text-[#0F172A]">
                         View
                         <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                       </span>
@@ -327,7 +327,7 @@ export function PopularCourses() {
                 className={`h-2 rounded-full transition-all duration-300 ${
                   i === activeIndex
                     ? "w-6 bg-[#7C3AED]"
-                    : "w-2 bg-white/20 hover:bg-white/40"
+                    : "w-2 bg-[#EDE9FE] hover:bg-[#DDD6FE]"
                 }`}
               />
             ))}
@@ -338,7 +338,7 @@ export function PopularCourses() {
           <Link href="/courses">
             <Button
               variant="ghost"
-              className="h-8 border border-white/10 bg-white/[0.04] px-4 text-sm font-medium text-[#ccc3d7] backdrop-blur-sm transition-all hover:border-[#7C3AED]/30 hover:bg-white/[0.08] hover:text-white"
+              className="h-8 border border-[#E5E7EB] bg-[#F5F1FF] px-4 text-sm font-medium text-[#475569] backdrop-blur-sm transition-all hover:border-[#DDD6FE] hover:bg-[#F5F1FF] hover:text-[#0F172A]"
             >
               Explore All Courses
               <ArrowRight className="ml-1.5 h-4 w-4" />

@@ -45,20 +45,20 @@ export function Faq() {
   };
 
   return (
-    <section className="relative px-5 py-20 md:px-16 md:py-20">
+    <section className="relative bg-[#FAF9FF] px-5 py-20 md:px-16 md:py-20">
       <div className="mx-auto max-w-[1440px]">
         <div className="grid gap-10 lg:grid-cols-[340px_1fr] lg:gap-16">
           {/* Left: Header */}
           <div>
-            <p className="mb-3 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#d3bbff]">
+            <p className="mb-3 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#7C3AED]">
               FAQ
             </p>
-            <h2 className="font-heading text-3xl font-bold text-white md:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-[#0F172A] md:text-4xl">
               Frequently Asked Questions
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-[#958da1]">
+            <p className="mt-4 text-sm leading-relaxed text-[#64748B]">
               Still have questions? Contact our team at{" "}
-              <span className="text-[#d3bbff]">support@growbiz.com</span>
+              <span className="text-[#7C3AED]">support@growbiz.com</span>
             </p>
           </div>
 
@@ -69,7 +69,7 @@ export function Faq() {
               return (
                 <div
                   key={i}
-                  className="border-b border-white/[0.06]"
+                  className="border-b border-[#F1F5F9]"
                 >
                   <button
                     onClick={() => toggle(i)}
@@ -77,7 +77,7 @@ export function Faq() {
                   >
                     <span
                       className={`text-sm font-medium transition-colors ${
-                        isOpen ? "text-white" : "text-[#ccc3d7]"
+                        isOpen ? "text-[#0F172A]" : "text-[#475569]"
                       }`}
                     >
                       {faq.question}
@@ -85,8 +85,8 @@ export function Faq() {
                     <span
                       className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md transition-all ${
                         isOpen
-                          ? "bg-[#7C3AED]/20 text-[#d3bbff]"
-                          : "bg-white/[0.05] text-[#958da1]"
+                          ? "bg-[#7C3AED]/20 text-[#7C3AED]"
+                          : "bg-[#F5F1FF] text-[#64748B]"
                       }`}
                     >
                       {isOpen ? (
@@ -101,7 +101,7 @@ export function Faq() {
                       isOpen ? "max-h-40 pb-5" : "max-h-0"
                     }`}
                   >
-                    <p className="text-sm leading-relaxed text-[#958da1]">
+                    <p className="text-sm leading-relaxed text-[#64748B]">
                       {faq.answer}
                     </p>
                   </div>

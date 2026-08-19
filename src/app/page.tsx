@@ -7,12 +7,11 @@ import { Experts } from "@/components/experts";
 import { Certification } from "@/components/certification";
 import { Testimonials } from "@/components/testimonials";
 import { Faq } from "@/components/faq";
-import { Pricing } from "@/components/pricing";
 import { FinalCta } from "@/components/final-cta";
 
 export default function Home() {
   return (
-    <>
+    <div className="bg-[#FAF9FF]">
       <Navbar />
       <main>
         <Hero />
@@ -21,11 +20,10 @@ export default function Home() {
         <Experts />
         <Certification />
         <Testimonials />
-        <Pricing />
         <Faq />
         <FinalCta />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

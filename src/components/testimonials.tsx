@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -44,29 +45,37 @@ export function Testimonials() {
 
   return (
     <section
-      className="relative px-5 py-20 md:px-16 md:py-24"
+      className="relative bg-[#F5F1FF] px-5 py-20 md:px-16 md:py-24"
       onMouseEnter={() => { isPaused.current = true; }}
       onMouseLeave={() => { isPaused.current = false; }}
     >
       <div className="mx-auto max-w-[850px] text-center">
-        <p className="mb-2 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#d3bbff]">
+        <p className="mb-2 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#7C3AED]">
           Testimonials
         </p>
-        <h2 className="mb-10 font-heading text-3xl font-bold text-white md:text-4xl">
+        <h2 className="mb-10 font-heading text-3xl font-bold text-[#0F172A] md:text-4xl">
           What Our Learners Say
         </h2>
 
         <div className="mx-auto mb-5 h-0.5 w-8 rounded-full bg-[#7C3AED]" />
 
-        <div className="mx-auto mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-b from-[#7C3AED] to-[#6D28D9] shadow-[0_0_12px_rgba(124,58,237,0.25)]">
-          <span className="font-heading text-sm font-bold text-white">G</span>
-        </div>
+       
+
+        <div className="mx-auto mb-6 flex h-10 w-10 items-center justify-center">
+  <Image
+    src="/logo.png"
+    alt="GrowBiz"
+    width={50}
+    height={50}
+    className="h-10 w-10 object-contain scale-[1.7]"
+  />
+</div>
 
         <div className="relative mx-auto min-h-[90px] max-w-[750px]">
           {testimonials.map((t, i) => (
             <p
               key={i}
-              className={`absolute inset-0 font-heading text-2xl font-medium leading-snug text-white transition-all duration-500 md:text-[32px] md:leading-[1.3] ${
+              className={`absolute inset-0 font-heading text-2xl font-medium leading-snug text-[#0F172A] transition-all duration-500 md:text-[32px] md:leading-[1.3] ${
                 i === active
                   ? "translate-y-0 opacity-100"
                   : "translate-y-3 opacity-0"
@@ -78,9 +87,9 @@ export function Testimonials() {
         </div>
 
         <div className="mt-8 flex flex-col items-center gap-1.5">
-          <div className="h-10 w-10 overflow-hidden rounded-full border border-white/10 bg-gradient-to-br from-[#f59e0b]/30 to-[#7C3AED]/30">
+          <div className="h-10 w-10 overflow-hidden rounded-full border border-[#E5E7EB] bg-gradient-to-br from-[#f59e0b]/30 to-[#7C3AED]/30">
             <div className="flex h-full w-full items-center justify-center">
-              <span className="font-heading text-xs font-bold text-white">
+              <span className="font-heading text-xs font-bold text-[#0F172A]">
                 {testimonials[active].name
                   .split(" ")
                   .map((n) => n[0])
@@ -88,10 +97,10 @@ export function Testimonials() {
               </span>
             </div>
           </div>
-          <p className="font-heading text-sm font-semibold text-white">
+          <p className="font-heading text-sm font-semibold text-[#0F172A]">
             {testimonials[active].name}
           </p>
-          <p className="text-xs text-[#958da1]">
+          <p className="text-xs text-[#64748B]">
             {testimonials[active].role}
           </p>
         </div>
@@ -106,7 +115,7 @@ export function Testimonials() {
               className={`h-2 rounded-full transition-all duration-300 ${
                 i === active
                   ? "w-6 bg-[#7C3AED]"
-                  : "w-2 bg-white/20 hover:bg-white/40"
+                  : "w-2 bg-[#EDE9FE] hover:bg-[#DDD6FE]"
               }`}
             />
           ))}

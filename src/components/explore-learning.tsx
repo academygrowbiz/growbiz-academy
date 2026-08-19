@@ -1,52 +1,52 @@
+
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import {
-  ArrowRight,
-  Cpu,
-  Briefcase,
-  Palette,
-  TrendingUp,
-  Users,
-  Megaphone,
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const cards = [
   {
-    icon: Cpu,
+    title: "Design",
+    slug: "design",
+    image: "/designbanner.png",
+    description:
+      "Learn graphic design, UI/UX, web design, and visual communication from industry experts.",
+  },
+  {
+    title: "Development",
+    slug: "development",
+    image: "/webdeveloperbanner.png",
+    description:
+      "Master front-end, back-end, and full-stack web development with modern tools and frameworks.",
+  },
+  {
+    title: "Mobile Development",
+    slug: "mobile-development",
+    image: "/mobileappbanner.png",
+    description:
+      "Build native and cross-platform mobile applications for iOS and Android.",
+  },
+  {
+    title: "Business",
+    slug: "business",
+    image: "/businessteambanner.png",
+    description:
+      "Develop strategic thinking, leadership skills, and business acumen to grow your career.",
+  },
+  {
     title: "AI & Technology",
+    slug: "ai-technology",
+    image: "/aibanner.png",
     description:
-      "Lessons on AI tools and automation that cover the most recent developments.",
+      "Explore artificial intelligence, machine learning, automation, and emerging technologies.",
   },
   {
-    icon: Briefcase,
-    title: "Business Strategy",
-    description:
-      "Classes in business development that cover the most recent advancements.",
-  },
-  {
-    icon: Palette,
     title: "Digital Skills",
+    slug: "digital-skills",
+    image: "/digitalmarketingbanner%20img.png",
     description:
-      "Digital skills courses that cover the most recent trends and tools.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Professional Growth",
-    description:
-      "Career development and leadership lessons for ambitious professionals.",
-  },
-  {
-    icon: Users,
-    title: "Leadership",
-    description:
-      "Build the skills to lead teams, drive culture, and inspire results.",
-  },
-  {
-    icon: Megaphone,
-    title: "Marketing",
-    description:
-      "Modern marketing strategies covering channels, analytics, and growth.",
+      "Master digital marketing, SEO, analytics, and modern productivity tools for career growth.",
   },
 ];
 
@@ -59,6 +59,7 @@ export function ExploreLearning() {
 
   const startAutoSlide = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
+
     intervalRef.current = setInterval(() => {
       if (!isPaused.current) {
         setActiveIndex((prev) => (prev + 1) % cards.length);
@@ -68,6 +69,7 @@ export function ExploreLearning() {
 
   useEffect(() => {
     startAutoSlide();
+
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
@@ -83,9 +85,11 @@ export function ExploreLearning() {
 
   const getVisibleIndices = () => {
     const indices = [];
+
     for (let i = 0; i < 3; i++) {
       indices.push((activeIndex + i) % cards.length);
     }
+
     return indices;
   };
 
@@ -93,41 +97,56 @@ export function ExploreLearning() {
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
+
     const container = scrollRef.current;
     const scrollLeft = container.scrollLeft;
+
     const cardWidth = container.firstElementChild
       ? (container.firstElementChild as HTMLElement).offsetWidth
       : 1;
+
     const index = Math.round(scrollLeft / cardWidth);
+
     setMobileIndex(Math.min(index, cards.length - 1));
   };
 
   const scrollToIndex = (index: number) => {
     if (!scrollRef.current) return;
+
     const container = scrollRef.current;
+
     const cardWidth = container.firstElementChild
       ? (container.firstElementChild as HTMLElement).offsetWidth
       : 0;
-    container.scrollTo({ left: cardWidth * index, behavior: "smooth" });
+
+    container.scrollTo({
+      left: cardWidth * index,
+      behavior: "smooth",
+    });
+
     setMobileIndex(index);
   };
 
   return (
-    <section className="relative px-5 py-20 md:px-16 md:py-20">
+    <section className="relative bg-[#F5F1FF] px-5 py-20 md:px-16 md:py-20">
       <div className="mx-auto max-w-[1440px]">
+        {/* Section Header */}
         <div className="mb-12 text-center">
-          <p className="mb-3 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#d3bbff]">
+          <p className="mb-3 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#7C3AED]">
             Explore Learning
           </p>
-          <h2 className="font-heading text-3xl font-bold text-white md:text-4xl lg:text-[40px]">
-Explore What You Can Learn          </h2>
-          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-[#ccc3d7]">
+
+          <h2 className="font-heading text-3xl font-bold text-[#0F172A] md:text-4xl lg:text-[40px]">
+            Explore What You Can Learn
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-[#475569]">
             Courses across technology, business, digital skills &amp;
             professional growth — designed for ambitious learners.
           </p>
         </div>
 
-        {/* Mobile/Tablet horizontal carousel */}
+        {/* Mobile / Tablet */}
         <div className="lg:hidden">
           <div
             ref={scrollRef}
@@ -139,41 +158,46 @@ Explore What You Can Learn          </h2>
                 key={index}
                 className="w-[85%] flex-shrink-0 snap-start sm:w-[48%]"
               >
-                <div
-                  className={`group flex h-full flex-col rounded-[20px] border p-6 transition-all duration-500 ${
+                <Link
+                  href={`/courses/${card.slug}`}
+                  className={`group flex h-full flex-col overflow-hidden rounded-[20px] border transition-all duration-500 ${
                     index === mobileIndex
-                      ? "border-[#7C3AED]/40 bg-[#7C3AED]/[0.06] shadow-[0_0_24px_rgba(124,58,237,0.12)]"
-                      : "border-white/[0.08] bg-white/[0.03]"
+                      ? "border-[#DDD6FE] bg-[#7C3AED]/[0.06] shadow-[0_0_24px_rgba(124,58,237,0.12)]"
+                      : "border-[#E5E7EB] bg-[#FFFFFF]"
                   }`}
                 >
-                  <div
-                    className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-500 ${
-                      index === mobileIndex
-                        ? "bg-[#7C3AED]/25 shadow-[0_0_12px_rgba(124,58,237,0.3)]"
-                        : "bg-[#7C3AED]/15"
-                    }`}
-                  >
-                    <card.icon className="h-5 w-5 text-[#d3bbff]" />
+                  {/* Card Image */}
+                  <div className="relative h-32 w-full overflow-hidden">
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="h-full w-full object-cover"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 to-transparent" />
                   </div>
 
-                  <h3 className="mb-2 font-heading text-lg font-semibold text-white">
-                    {card.title}
-                  </h3>
+                  {/* Card Content */}
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="mb-2 font-heading text-lg font-semibold text-[#0F172A]">
+                      {card.title}
+                    </h3>
 
-                  <p className="mb-5 flex-1 text-sm leading-relaxed text-[#958da1]">
-                    {card.description}
-                  </p>
+                    <p className="mb-4 flex-1 text-sm leading-relaxed text-[#64748B]">
+                      {card.description}
+                    </p>
 
-                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-[#d3bbff]">
-                    Learn More
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </div>
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-[#7C3AED]">
+                      Learn More
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
+                </Link>
               </div>
             ))}
           </div>
 
-          {/* Pagination dots for mobile/tablet */}
+          {/* Mobile Dots */}
           <div className="mt-6 flex items-center justify-center gap-2">
             {cards.map((_, i) => (
               <button
@@ -183,14 +207,14 @@ Explore What You Can Learn          </h2>
                 className={`h-2 rounded-full transition-all duration-300 ${
                   i === mobileIndex
                     ? "w-6 bg-[#7C3AED]"
-                    : "w-2 bg-white/20 hover:bg-white/40"
+                    : "w-2 bg-[#EDE9FE] hover:bg-[#DDD6FE]"
                 }`}
               />
             ))}
           </div>
         </div>
 
-        {/* Desktop grid with auto-rotate */}
+        {/* Desktop */}
         <div className="hidden lg:block">
           <div
             className="grid gap-5 lg:grid-cols-3"
@@ -202,45 +226,54 @@ Explore What You Can Learn          </h2>
               const isActive = position === 0;
 
               return (
-                <div
+                <Link
                   key={cardIndex}
-                  className={`group flex flex-col rounded-[20px] border p-6 transition-all duration-500 ${
+                  href={`/courses/${card.slug}`}
+                  className={`group flex flex-col overflow-hidden rounded-[20px] border transition-all duration-500 ${
                     isActive
-                      ? "border-[#7C3AED]/40 bg-[#7C3AED]/[0.06] shadow-[0_0_24px_rgba(124,58,237,0.12)]"
-                      : "border-white/[0.08] bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05]"
+                      ? "border-[#DDD6FE] bg-[#7C3AED]/[0.06] shadow-[0_0_24px_rgba(124,58,237,0.12)]"
+                      : "border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#E5E7EB] hover:bg-[#F5F1FF]"
                   }`}
                 >
-                  <div
-                    className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-500 ${
-                      isActive
-                        ? "bg-[#7C3AED]/25 shadow-[0_0_12px_rgba(124,58,237,0.3)]"
-                        : "bg-[#7C3AED]/15 group-hover:bg-[#7C3AED]/20"
-                    }`}
-                  >
-                    <card.icon className="h-5 w-5 text-[#d3bbff]" />
+                  {/* Card Image */}
+                  <div className="relative h-36 w-full overflow-hidden">
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 to-transparent" />
                   </div>
 
-                  <h3 className="mb-2 font-heading text-lg font-semibold text-white">
-                    {card.title}
-                  </h3>
+                  {/* Card Content */}
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="mb-2 font-heading text-lg font-semibold text-[#0F172A]">
+                      {card.title}
+                    </h3>
 
-                  <p className="mb-5 flex-1 text-sm leading-relaxed text-[#958da1]">
-                    {card.description}
-                  </p>
+                    <p className="mb-5 flex-1 text-sm leading-relaxed text-[#64748B]">
+                      {card.description}
+                    </p>
 
-                  <span
-                    className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${
-                      isActive ? "text-white" : "text-[#d3bbff] group-hover:text-white"
-                    }`}
-                  >
-                    Learn More
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                  </span>
-                </div>
+                    <span
+                      className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${
+                        isActive
+                          ? "text-[#0F172A]"
+                          : "text-[#7C3AED] group-hover:text-[#0F172A]"
+                      }`}
+                    >
+                      Learn More
+
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </div>
+                </Link>
               );
             })}
           </div>
 
+          {/* Desktop Dots */}
           <div className="mt-10 flex items-center justify-center gap-2">
             {cards.map((_, i) => (
               <button
@@ -250,7 +283,7 @@ Explore What You Can Learn          </h2>
                 className={`h-2 rounded-full transition-all duration-300 ${
                   i === activeIndex
                     ? "w-6 bg-[#7C3AED]"
-                    : "w-2 bg-white/20 hover:bg-white/40"
+                    : "w-2 bg-[#EDE9FE] hover:bg-[#DDD6FE]"
                 }`}
               />
             ))}
