@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${plusJakartaSans.variable} ${inter.variable} ${spaceGrotesk.variable} dark`}
+      className={`${plusJakartaSans.variable} ${inter.variable} ${spaceGrotesk.variable}`}
     >
       <body>{children}</body>
     </html>
