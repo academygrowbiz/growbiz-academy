@@ -35,8 +35,8 @@ export function CoursesSidebar() {
   return (
     <>
       <aside className="sticky top-20 hidden h-fit w-[220px] shrink-0 lg:block">
-        <div className="rounded-[20px] border border-white/[0.08] bg-white/[0.03] p-3">
-          <p className="mb-2 px-3 pt-1 font-technical text-[10px] font-medium uppercase tracking-[0.1em] text-[#958da1]">
+        <div className="rounded-[20px] border border-[#E5E7EB] bg-[#FFFFFF] p-3">
+          <p className="mb-2 px-3 pt-1 font-technical text-[10px] font-medium uppercase tracking-[0.1em] text-[#64748B]">
             Browse Categories
           </p>
           <nav className="flex flex-col gap-1">
@@ -49,14 +49,14 @@ export function CoursesSidebar() {
                   className={cn(
                     "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
                     isActive
-                      ? "bg-gradient-to-r from-[#7C3AED]/20 to-[#6D28D9]/10 text-white shadow-[0_0_12px_rgba(124,58,237,0.1)]"
-                      : "text-[#958da1] hover:-translate-y-px hover:bg-white/[0.05] hover:text-[#ccc3d7]"
+                      ? "bg-[#F5F1FF] text-[#0F172A] shadow-[0_0_12px_rgba(124,58,237,0.08)]"
+                      : "text-[#64748B] hover:-translate-y-px hover:bg-[#FAF9FF] hover:text-[#0F172A]"
                   )}
                 >
                   <link.icon
                     className={cn(
                       "h-4 w-4 shrink-0",
-                      isActive ? "text-[#d3bbff]" : "text-[#958da1]"
+                      isActive ? "text-[#7C3AED]" : "text-[#64748B]"
                     )}
                   />
                   {link.label}
@@ -74,18 +74,18 @@ export function CoursesSidebar() {
         <div className="inline-block">
           <button
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="flex items-center gap-2 rounded-[16px] border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm font-medium text-white"
+            className="flex items-center gap-2 rounded-[16px] border border-[#E5E7EB] bg-[#FFFFFF] px-4 py-3 text-sm font-medium text-[#0F172A]"
           >
             {activeLabel}
             <ChevronDown
               className={cn(
-                "h-4 w-4 text-[#958da1] transition-transform",
+                "h-4 w-4 text-[#64748B] transition-transform",
                 mobileOpen && "rotate-180"
               )}
             />
           </button>
           {mobileOpen && (
-            <div className="absolute right-0 z-20 mt-2 w-56 overflow-hidden rounded-[16px] border border-white/[0.08] bg-[#0F172A]/95 p-2 backdrop-blur-xl">
+            <div className="absolute right-0 z-20 mt-2 w-56 overflow-hidden rounded-[16px] border border-[#E5E7EB] bg-[#FFFFFF] p-2 shadow-lg">
               {sidebarLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -96,8 +96,8 @@ export function CoursesSidebar() {
                     className={cn(
                       "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm transition-colors",
                       isActive
-                        ? "bg-[#7C3AED]/[0.12] font-medium text-white"
-                        : "text-[#958da1] hover:bg-white/[0.04] hover:text-white"
+                        ? "bg-[#F5F1FF] font-medium text-[#0F172A]"
+                        : "text-[#64748B] hover:bg-[#FAF9FF] hover:text-[#0F172A]"
                     )}
                   >
                     <link.icon className="h-4 w-4" />

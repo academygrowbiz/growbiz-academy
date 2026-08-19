@@ -5,7 +5,9 @@ import { cn } from "@/lib/utils";
 
 const tabs = [
   { id: "about-course", label: "About Course" },
-  { id: "course-content", label: "Course Content" },
+  { id: "lessons", label: "Lessons" },
+  { id: "learning-outcomes", label: "Learning Outcomes" },
+  { id: "career-opportunities", label: "Career Opportunities" },
   { id: "about-publisher", label: "About Publisher" },
   { id: "course-certificate", label: "Course Certificate" },
   { id: "faqs", label: "FAQs" },
@@ -44,7 +46,7 @@ export function CourseSectionNav() {
   };
 
   return (
-    <div className="sticky top-[64px] z-30 border-b border-white/[0.06] bg-[#0F172A]/95 backdrop-blur-md">
+    <div className="sticky top-[64px] z-30 border-b border-[#E5E7EB] bg-[#FFFFFF]/95 backdrop-blur-md">
       <div className="mx-auto max-w-[1440px] px-3 md:px-16">
         <nav className="flex gap-0.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {tabs.map((tab) => (
@@ -54,8 +56,8 @@ export function CourseSectionNav() {
               className={cn(
                 "relative whitespace-nowrap px-3 py-3 text-xs font-medium transition-colors md:px-4 md:py-3.5 md:text-sm",
                 activeTab === tab.id
-                  ? "text-white"
-                  : "text-[#958da1] hover:text-[#ccc3d7]"
+                  ? "text-[#0F172A]"
+                  : "text-[#64748B] hover:text-[#475569]"
               )}
             >
               {tab.label}

@@ -20,16 +20,16 @@ export function CourseFaqAccordion({ faqs, courseTitle }: CourseFaqProps) {
     <div className="grid gap-6 lg:grid-cols-[300px_1fr] lg:gap-14">
       {/* Left: Header */}
       <div>
-        <p className="mb-3 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#d3bbff]">
+        <p className="mb-3 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#7C3AED]">
           FAQs
         </p>
-        <h2 className="font-heading text-xl font-bold text-white md:text-2xl">
+        <h2 className="font-heading text-xl font-bold text-[#0F172A] md:text-2xl">
           Frequently Asked Questions
         </h2>
-        <p className="mt-3 text-sm leading-relaxed text-[#958da1]">
+        <p className="mt-3 text-sm leading-relaxed text-[#64748B]">
           Common questions about {courseTitle}. Can&apos;t find your answer?
           Reach out at{" "}
-          <span className="text-[#d3bbff]">support@growbiz.com</span>
+          <span className="text-[#7C3AED]">support@growbiz.com</span>
         </p>
       </div>
 
@@ -38,14 +38,14 @@ export function CourseFaqAccordion({ faqs, courseTitle }: CourseFaqProps) {
         {faqs.map((faq, i) => {
           const isOpen = openIndex === i;
           return (
-            <div key={i} className="border-b border-white/[0.06]">
+            <div key={i} className="border-b border-[#F1F5F9]">
               <button
                 onClick={() => toggle(i)}
                 className="flex w-full items-center justify-between gap-4 py-5 text-left transition-colors"
               >
                 <span
                   className={`text-sm font-medium transition-colors ${
-                    isOpen ? "text-white" : "text-[#ccc3d7]"
+                    isOpen ? "text-[#0F172A]" : "text-[#475569]"
                   }`}
                 >
                   {faq.question}
@@ -53,8 +53,8 @@ export function CourseFaqAccordion({ faqs, courseTitle }: CourseFaqProps) {
                 <span
                   className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md transition-all ${
                     isOpen
-                      ? "bg-[#7C3AED]/20 text-[#d3bbff]"
-                      : "bg-white/[0.05] text-[#958da1]"
+                      ? "bg-[#7C3AED]/20 text-[#7C3AED]"
+                      : "bg-[#F5F1FF] text-[#64748B]"
                   }`}
                 >
                   {isOpen ? (
@@ -69,7 +69,7 @@ export function CourseFaqAccordion({ faqs, courseTitle }: CourseFaqProps) {
                   isOpen ? "max-h-40 pb-5" : "max-h-0"
                 }`}
               >
-                <p className="text-sm leading-relaxed text-[#958da1]">
+                <p className="text-sm leading-relaxed text-[#64748B]">
                   {faq.answer}
                 </p>
               </div>

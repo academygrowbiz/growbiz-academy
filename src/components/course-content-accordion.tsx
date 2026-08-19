@@ -28,7 +28,6 @@ export function CourseContentAccordion({
 
   const toggleModule = (index: number) => {
     if (allExpanded) {
-      // If all expanded, clicking one closes it
       setOpenModules((prev) => {
         const next = new Set(prev);
         if (next.has(index)) {
@@ -40,7 +39,6 @@ export function CourseContentAccordion({
         return next;
       });
     } else {
-      // Accordion behavior: opening one closes previous
       setOpenModules((prev) => {
         if (prev.has(index)) {
           return new Set();
@@ -101,27 +99,27 @@ export function CourseContentAccordion({
     <div>
       {/* Stats Row */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-2 text-xs text-[#958da1] md:gap-3 md:text-sm">
+        <div className="flex flex-wrap items-center gap-2 text-xs text-[#64748B] md:gap-3 md:text-sm">
           <span>{totalLessons} Lessons</span>
-          <span className="text-white/20">•</span>
+          <span className="text-[#E5E7EB]">•</span>
           <span>{totalVideos} Videos</span>
-          <span className="text-white/20">•</span>
+          <span className="text-[#E5E7EB]">•</span>
           <span>{totalArticles} Articles</span>
-          <span className="text-white/20">•</span>
+          <span className="text-[#E5E7EB]">•</span>
           <span>{totalAssignments} Assignments</span>
-          <span className="text-white/20">•</span>
+          <span className="text-[#E5E7EB]">•</span>
           <span>{totalHours}h Completion Time</span>
         </div>
         <button
           onClick={toggleAll}
-          className="text-xs font-medium text-[#7C3AED] transition-colors hover:text-[#d3bbff] md:text-sm"
+          className="text-xs font-medium text-[#7C3AED] transition-colors hover:text-[#6D28D9] md:text-sm"
         >
           {allExpanded ? "Collapse All" : "Expand All Lessons"}
         </button>
       </div>
 
       {/* Modules */}
-      <div className="divide-y divide-white/[0.06] overflow-hidden rounded-[16px] border border-white/[0.08] bg-white/[0.03]">
+      <div className="divide-y divide-[#F1F5F9] overflow-hidden rounded-[16px] border border-[#E5E7EB] bg-[#FFFFFF]">
         {modules.map((module, index) => {
           const isOpen = openModules.has(index);
           const sectionCount = module.lessons.length;
@@ -134,29 +132,29 @@ export function CourseContentAccordion({
             <div key={index}>
               <button
                 onClick={() => toggleModule(index)}
-                className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left transition-colors hover:bg-white/[0.02] md:px-6"
+                className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left transition-colors hover:bg-[#FAF9FF] md:px-6"
               >
                 <div className="flex min-w-0 items-center gap-3">
                   <div className={cn(
                     "flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors",
                     isOpen
-                      ? "border-[#7C3AED]/40 bg-[#7C3AED]/10"
-                      : "border-white/[0.1] bg-white/[0.04]"
+                      ? "border-[#DDD6FE] bg-[#EDE9FE]"
+                      : "border-[#E5E7EB] bg-[#FAF9FF]"
                   )}>
                     {isOpen ? (
                       <Minus className="h-3.5 w-3.5 text-[#7C3AED]" />
                     ) : (
-                      <Plus className="h-3.5 w-3.5 text-[#958da1]" />
+                      <Plus className="h-3.5 w-3.5 text-[#64748B]" />
                     )}
                   </div>
                   <span className={cn(
                     "truncate text-sm font-medium",
-                    isOpen ? "text-white" : "text-[#ccc3d7]"
+                    isOpen ? "text-[#0F172A]" : "text-[#475569]"
                   )}>
                     {module.title}
                   </span>
                 </div>
-                <span className="shrink-0 whitespace-nowrap text-xs text-[#958da1]">
+                <span className="shrink-0 whitespace-nowrap text-xs text-[#64748B]">
                   {sectionCount} Lessons · {totalDuration} min
                 </span>
               </button>
@@ -168,26 +166,26 @@ export function CourseContentAccordion({
                 )}
               >
                 <div className="overflow-hidden">
-                  <div className="border-t border-white/[0.04] bg-white/[0.01] px-4 py-2 md:px-6">
+                  <div className="border-t border-[#F1F5F9] bg-[#FAF9FF] px-4 py-2 md:px-6">
                     {module.lessons.map((lesson, lIndex) => (
                       <Link
                         key={lIndex}
                         href={`/courses/${categorySlug}/${courseSlug}#lesson-${index}-${lIndex}`}
-                        className="flex items-center justify-between gap-3 rounded-lg px-2 py-2.5 transition-colors hover:bg-white/[0.03] active:bg-white/[0.05]"
+                        className="flex items-center justify-between gap-3 rounded-lg px-2 py-2.5 transition-colors hover:bg-[#F5F1FF] active:bg-[#EDE9FE]"
                       >
                         <div className="flex min-w-0 items-center gap-3">
                           {getLessonIcon(lesson.type)}
-                          <span className="truncate text-sm text-[#ccc3d7]">
+                          <span className="truncate text-sm text-[#475569]">
                             {lesson.title}
                           </span>
                         </div>
                         <div className="flex shrink-0 items-center gap-2">
-                          <span className="hidden text-[10px] uppercase tracking-wide text-[#958da1]/70 sm:inline">
+                          <span className="hidden text-[10px] uppercase tracking-wide text-[#64748B]/70 sm:inline">
                             {getLessonTypeLabel(lesson.type)}
                           </span>
                           <div className="flex items-center gap-1">
-                            <Clock className="h-3 w-3 text-[#958da1]" />
-                            <span className="text-xs text-[#958da1]">{lesson.duration}</span>
+                            <Clock className="h-3 w-3 text-[#64748B]" />
+                            <span className="text-xs text-[#64748B]">{lesson.duration}</span>
                           </div>
                         </div>
                       </Link>

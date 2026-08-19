@@ -21,13 +21,13 @@ export default function CoursesPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/90 via-[#0F172A]/70 to-[#0F172A]/40" />
           <div className="absolute inset-0 flex items-center px-5 pt-14 md:px-16 md:pt-16 lg:pt-12">
             <div className="mx-auto w-full max-w-[1440px]">
-              <p className="mb-2 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#d3bbff]">
+              <p className="mb-2 font-technical text-xs font-medium uppercase tracking-[0.1em] text-[#DDD6FE]">
                 Explore Courses
               </p>
               <h1 className="max-w-lg font-heading text-3xl font-bold leading-[1.15] text-white md:text-4xl lg:text-[42px]">
                 Skills That Open Doors, Courses That Deliver
               </h1>
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-[#ccc3d7]">
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-white/80">
                 Expert-led courses in design, development, AI, business and
                 digital skills — built for professionals ready to grow.
               </p>
@@ -42,13 +42,13 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      <div id="courses-content" className="px-5 py-10 md:px-16 md:py-14">
+      <div id="courses-content" className="bg-[#FAF9FF] px-5 py-10 md:px-16 md:py-14">
         <div className="mx-auto flex max-w-[1440px] flex-col gap-0 lg:flex-row lg:gap-10">
           <CoursesSidebar />
 
           <div className="min-w-0 flex-1">
             <div className="mb-10">
-              <h2 className="mb-5 font-heading text-xl font-bold text-white md:text-2xl">
+              <h2 className="mb-5 font-heading text-xl font-bold text-[#0F172A] md:text-2xl">
                 Popular Courses
               </h2>
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -59,10 +59,10 @@ export default function CoursesPage() {
             </div>
 
             <div className="mb-10">
-              <h2 className="mb-1 font-heading text-xl font-bold text-white md:text-2xl">
+              <h2 className="mb-1 font-heading text-xl font-bold text-[#0F172A] md:text-2xl">
                 Trending Courses
               </h2>
-              <p className="mb-5 text-sm text-[#958da1]">
+              <p className="mb-5 text-sm text-[#64748B]">
                 Courses gaining momentum this month across all categories.
               </p>
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -72,11 +72,11 @@ export default function CoursesPage() {
               </div>
             </div>
 
-            <div className="rounded-[20px] border border-white/[0.06] bg-white/[0.02] px-6 py-8 md:px-8 md:py-8">
-              <h2 className="mb-3 font-heading text-lg font-bold text-white">
+            <div className="rounded-[20px] border border-[#E5E7EB] bg-[#FFFFFF] px-6 py-8 md:px-8 md:py-8">
+              <h2 className="mb-3 font-heading text-lg font-bold text-[#0F172A]">
                 Learn Skills That Matter
               </h2>
-              <p className="max-w-3xl text-sm leading-relaxed text-[#958da1]">
+              <p className="max-w-3xl text-sm leading-relaxed text-[#64748B]">
                 GrowBiz Academy offers expert-led courses across design,
                 development, business strategy, AI &amp; technology, and digital
                 skills. Each course is built around practical outcomes — helping
