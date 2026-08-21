@@ -458,3 +458,5 @@ export default async function CourseDetailsPage({
     </main>
   );
 }
+
+
