@@ -8,6 +8,8 @@ import { Certification } from "@/components/certification";
 import { Testimonials } from "@/components/testimonials";
 import { Faq } from "@/components/faq";
 import { FinalCta } from "@/components/final-cta";
+import { WhyGrowBiz } from "@/components/why-growbiz";
+import { HowItWorks } from "@/components/how-it-works";
 
 export default function Home() {
   return (
@@ -15,8 +17,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <WhyGrowBiz/>
         <ExploreLearning />
         <PopularCourses />
+        <HowItWorks />
         <Experts />
         <Certification />
         <Testimonials />

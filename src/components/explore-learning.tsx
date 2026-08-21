@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
@@ -7,58 +6,61 @@ import { ArrowRight } from "lucide-react";
 
 const cards = [
   {
-    title: "Design",
-    slug: "design",
-    image: "/designbanner.png",
-    description:
-      "Learn graphic design, UI/UX, web design, and visual communication from industry experts.",
-  },
-  {
-    title: "Development",
-    slug: "development",
-    image: "/webdeveloperbanner.png",
-    description:
-      "Master front-end, back-end, and full-stack web development with modern tools and frameworks.",
-  },
-  {
-    title: "Mobile Development",
-    slug: "mobile-development",
-    image: "/mobileappbanner.png",
-    description:
-      "Build native and cross-platform mobile applications for iOS and Android.",
-  },
-  {
-    title: "Business",
-    slug: "business",
-    image: "/businessteambanner.png",
-    description:
-      "Develop strategic thinking, leadership skills, and business acumen to grow your career.",
-  },
-  {
-    title: "AI & Technology",
-    slug: "ai-technology",
-    image: "/aibanner.png",
-    description:
-      "Explore artificial intelligence, machine learning, automation, and emerging technologies.",
-  },
-  {
-    title: "Digital Skills",
+    title: "Digital Marketing",
     slug: "digital-skills",
     image: "/digitalmarketingbanner%20img.png",
     description:
-      "Master digital marketing, SEO, analytics, and modern productivity tools for career growth.",
+      "Build practical skills for modern digital marketing careers.",
+  },
+  {
+    title: "Web Development",
+    slug: "development",
+    image: "/webdeveloperbanner.png",
+    description:
+      "Build modern websites and applications with industry-ready skills.",
+  },
+  {
+    title: "UI/UX Design",
+    slug: "design",
+    image: "/designbanner.png",
+    description:
+      "Design intuitive digital experiences from research to prototype.",
+  },
+  {
+    title: "AI & Automation",
+    slug: "ai-technology",
+    image: "/aibanner.png",
+    description:
+      "Explore AI tools, automation, agents, and practical workflows.",
+  },
+  {
+    title: "Graphic & Motion Design",
+    slug: "design",
+    image: "/designbanner.png",
+    description:
+      "Create engaging visual and motion content for modern brands.",
+  },
+  {
+    title: "Business & Sales",
+    slug: "business",
+    image: "/businessteambanner.png",
+    description:
+      "Develop practical skills in sales, business development, and CRM.",
   },
 ];
 
 export function ExploreLearning() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [mobileIndex, setMobileIndex] = useState(0);
+
   const isPaused = useRef(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const startAutoSlide = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
 
     intervalRef.current = setInterval(() => {
       if (!isPaused.current) {
@@ -71,7 +73,9 @@ export function ExploreLearning() {
     startAutoSlide();
 
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
   }, [startAutoSlide]);
 
@@ -84,7 +88,7 @@ export function ExploreLearning() {
   };
 
   const getVisibleIndices = () => {
-    const indices = [];
+    const indices: number[] = [];
 
     for (let i = 0; i < 3; i++) {
       indices.push((activeIndex + i) % cards.length);
@@ -137,12 +141,12 @@ export function ExploreLearning() {
           </p>
 
           <h2 className="font-heading text-3xl font-bold text-[#0F172A] md:text-4xl lg:text-[40px]">
-            Explore What You Can Learn
+            Choose Your Career Path
           </h2>
 
           <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-[#475569]">
-            Courses across technology, business, digital skills &amp;
-            professional growth — designed for ambitious learners.
+            Career-focused programs designed to help you build practical,
+            industry-ready skills.
           </p>
         </div>
 
@@ -155,7 +159,7 @@ export function ExploreLearning() {
           >
             {cards.map((card, index) => (
               <div
-                key={index}
+                key={`${card.title}-${index}`}
                 className="w-[85%] flex-shrink-0 snap-start sm:w-[48%]"
               >
                 <Link
@@ -171,7 +175,7 @@ export function ExploreLearning() {
                     <img
                       src={card.image}
                       alt={card.title}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 to-transparent" />
@@ -188,7 +192,7 @@ export function ExploreLearning() {
                     </p>
 
                     <span className="inline-flex items-center gap-1.5 text-sm font-medium text-[#7C3AED]">
-                      Learn More
+                      Explore Program
                       <ArrowRight className="h-3.5 w-3.5" />
                     </span>
                   </div>
@@ -199,13 +203,13 @@ export function ExploreLearning() {
 
           {/* Mobile Dots */}
           <div className="mt-6 flex items-center justify-center gap-2">
-            {cards.map((_, i) => (
+            {cards.map((card, index) => (
               <button
-                key={i}
-                onClick={() => scrollToIndex(i)}
-                aria-label={`Go to slide ${i + 1}`}
+                key={`${card.title}-dot`}
+                onClick={() => scrollToIndex(index)}
+                aria-label={`Go to ${card.title}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  i === mobileIndex
+                  index === mobileIndex
                     ? "w-6 bg-[#7C3AED]"
                     : "w-2 bg-[#EDE9FE] hover:bg-[#DDD6FE]"
                 }`}
@@ -227,12 +231,12 @@ export function ExploreLearning() {
 
               return (
                 <Link
-                  key={cardIndex}
+                  key={`${card.title}-${cardIndex}`}
                   href={`/courses/${card.slug}`}
                   className={`group flex flex-col overflow-hidden rounded-[20px] border transition-all duration-500 ${
                     isActive
                       ? "border-[#DDD6FE] bg-[#7C3AED]/[0.06] shadow-[0_0_24px_rgba(124,58,237,0.12)]"
-                      : "border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#E5E7EB] hover:bg-[#F5F1FF]"
+                      : "border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#DDD6FE] hover:bg-[#F5F1FF]"
                   }`}
                 >
                   {/* Card Image */}
@@ -263,8 +267,7 @@ export function ExploreLearning() {
                           : "text-[#7C3AED] group-hover:text-[#0F172A]"
                       }`}
                     >
-                      Learn More
-
+                      Explore Program
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   </div>
@@ -275,13 +278,13 @@ export function ExploreLearning() {
 
           {/* Desktop Dots */}
           <div className="mt-10 flex items-center justify-center gap-2">
-            {cards.map((_, i) => (
+            {cards.map((card, index) => (
               <button
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                aria-label={`Go to slide ${i + 1}`}
+                key={`${card.title}-desktop-dot`}
+                onClick={() => setActiveIndex(index)}
+                aria-label={`Show ${card.title}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  i === activeIndex
+                  index === activeIndex
                     ? "w-6 bg-[#7C3AED]"
                     : "w-2 bg-[#EDE9FE] hover:bg-[#DDD6FE]"
                 }`}
