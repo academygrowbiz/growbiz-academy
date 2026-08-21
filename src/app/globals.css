@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -101,50 +102,59 @@
   }
 }
 
-@layer utilities {
-  @keyframes spin-slow {
-    0% { transform: rotate(0deg) scale(1); }
-    25% { transform: rotate(90deg) scale(1.03); }
-    50% { transform: rotate(180deg) scale(1); }
-    75% { transform: rotate(270deg) scale(1.03); }
-    100% { transform: rotate(360deg) scale(1); }
-  }
-  @keyframes spin-slow-reverse {
-    0% { transform: rotate(360deg) scale(1); }
-    25% { transform: rotate(270deg) scale(1.02); }
-    50% { transform: rotate(180deg) scale(1); }
-    75% { transform: rotate(90deg) scale(1.02); }
-    100% { transform: rotate(0deg) scale(1); }
-  }
-  @keyframes float-y {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-  }
-  @keyframes float-xy {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(6px, -10px); }
-    50% { transform: translate(-3px, -14px); }
-    75% { transform: translate(-7px, -5px); }
-  }
-  @keyframes pulse-soft {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.5); }
-  }
-  .animate-spin-slow {
-    animation: spin-slow 30s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-  .animate-spin-slow-reverse {
-    animation: spin-slow-reverse 24s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-  .animate-float-y {
-    animation: float-y 3.5s ease-in-out infinite;
-  }
-  .animate-float-xy {
-    animation: float-xy 5s ease-in-out infinite;
-  }
-  .animate-pulse-soft {
-    animation: pulse-soft 2.5s ease-in-out infinite;
-  }
+/* Keyframes Definitions */
+@keyframes spin-slow {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(90deg) scale(1.03); }
+  50% { transform: rotate(180deg) scale(1); }
+  75% { transform: rotate(270deg) scale(1.03); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes spin-slow-reverse {
+  0% { transform: rotate(360deg) scale(1); }
+  25% { transform: rotate(270deg) scale(1.02); }
+  50% { transform: rotate(180deg) scale(1); }
+  75% { transform: rotate(90deg) scale(1.02); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes float-xy {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(6px, -10px); }
+  50% { transform: translate(-3px, -14px); }
+  75% { transform: translate(-7px, -5px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* Tailwind v4 Utility Class Directives */
+@utility animate-spin-slow {
+  animation: spin-slow 30s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@utility animate-spin-slow-reverse {
+  animation: spin-slow-reverse 24s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@utility animate-float-y {
+  animation: float-y 3.5s ease-in-out infinite;
+}
+
+@utility animate-float-xy {
+  animation: float-xy 5s ease-in-out infinite;
+}
+
+@utility animate-pulse-soft {
+  animation: pulse-soft 2.5s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
